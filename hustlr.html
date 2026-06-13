@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUSTLR — We make businesses impossible to ignore</title>
+<meta name="description" content="Hustlr is a student-run digital studio. Websites, reels, brands, chatbots and content for local businesses that want to blow up online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3EFE6;
+  --ink:#111110;
+  --blue:#2230FF;
+  --orange:#FF4D00;
+  --wa:#12B05B;
+  --wa-deep:#0B8743;
+  --display:'Anton',sans-serif;
+  --body:'Archivo',sans-serif;
+  --mono:'Space Mono',monospace;
+  --pad:clamp(20px,5vw,72px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--orange);color:var(--paper)}
+a{color:inherit}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+
+/* grain */
+.grain{
+  position:fixed;inset:-50%;z-index:99;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity:.05;
+}
+
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+
+/* scroll progress */
+.progress{
+  position:fixed;top:0;left:0;height:4px;width:0;
+  background:var(--orange);z-index:100;
+}
+
+/* spinning star accents */
+.spin{
+  display:inline-block;
+  animation:spin 9s linear infinite;
+  transform-origin:center;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px var(--pad);
+  background:#f3efe6d9;backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--ink);
+}
+.logo{
+  font-family:var(--display);font-size:1.45rem;letter-spacing:.02em;
+  text-decoration:none;line-height:1;
+}
+.logo i{font-style:normal;color:var(--blue)}
+.nav-right{display:flex;gap:28px;align-items:center}
+.nav-right a{text-decoration:none;font-weight:600;font-size:.88rem}
+.nav-right a:not(.pill){opacity:.65;transition:opacity .15s}
+.nav-right a:not(.pill):hover{opacity:1}
+.pill{
+  background:var(--ink);color:var(--paper);
+  padding:9px 20px;border-radius:999px;
+  transition:background .15s,transform .15s;
+}
+.pill:hover{background:var(--blue);transform:rotate(-2deg)}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:calc(100svh - 64px);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(40px,6vh,70px) var(--pad) 0;
+  position:relative;
+}
+.hero-inner{max-width:1380px;margin:0 auto;width:100%}
+.chip{
+  display:inline-block;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  border:2px solid var(--ink);border-radius:999px;
+  padding:7px 16px;background:var(--paper);
+  transform:rotate(-2deg);
+  margin-bottom:clamp(20px,3vh,34px);
+}
+.chip b{color:var(--orange)}
+.hero h1{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(3rem,10.5vw,9rem);
+  line-height:.95;letter-spacing:.005em;
+}
+.hero h1 .row{display:block;overflow:hidden}
+.hero h1 .row>span{display:inline-block}
+.hero .star-accent{
+  font-size:.45em;vertical-align:.55em;color:var(--orange);
+}
+.rotator{
+  display:inline-grid;text-align:left;vertical-align:bottom;
+  color:var(--blue);
+}
+.rotator span{
+  grid-area:1/1;
+  opacity:0;transform:translateY(.4em);
+  transition:opacity .35s ease,transform .35s ease;
+  white-space:nowrap;
+}
+.rotator span.on{opacity:1;transform:none}
+.hero .outline{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;
+  margin-top:clamp(28px,5vh,48px);
+  padding-bottom:clamp(24px,4vh,40px);
+}
+.hero-foot p{max-width:30rem;font-size:clamp(.98rem,1.4vw,1.12rem);font-weight:500}
+.hero-foot p b{background:var(--ink);color:var(--paper);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.scroll-hint{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;display:inline-flex;gap:10px;align-items:center;
+}
+.scroll-hint .arr{display:inline-block;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* hero load sequence */
+.load-up{opacity:0;transform:translateY(110%);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.load-fade{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+body.loaded .load-up,body.loaded .load-fade{opacity:1;transform:none}
+
+/* ---------- TICKERS ---------- */
+.ticker{
+  background:var(--ink);color:var(--paper);
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  overflow:hidden;white-space:nowrap;padding:16px 0;
+}
+.ticker-track{display:inline-flex;animation:scroll 24s linear infinite}
+.ticker.rev .ticker-track{animation:scrollrev 24s linear infinite}
+.ticker span{
+  font-family:var(--display);text-transform:uppercase;font-size:1.25rem;letter-spacing:.04em;
+  margin:0 28px;
+}
+.ticker .alt{color:transparent;-webkit-text-stroke:1px var(--paper)}
+.ticker.orange{background:var(--orange);color:var(--ink);border-color:var(--ink)}
+.ticker.orange .alt{-webkit-text-stroke:1px var(--ink)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scrollrev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* ---------- SECTIONS ---------- */
+section{padding:clamp(70px,12vh,140px) var(--pad)}
+.shell{max-width:1380px;margin:0 auto}
+.sec-label{display:flex;align-items:center;gap:14px;margin-bottom:clamp(36px,6vh,60px)}
+.sec-label::after{content:"";flex:1;height:2px;background:currentColor;opacity:.9}
+.sec-label .mono{font-weight:700}
+
+/* services accordion */
+.svc-list{border-top:3px solid var(--ink)}
+details.svc{border-bottom:3px solid var(--ink)}
+details.svc summary{
+  list-style:none;cursor:pointer;
+  display:grid;grid-template-columns:90px 1fr auto;
+  align-items:center;gap:clamp(14px,3vw,40px);
+  padding:clamp(20px,3.4vh,32px) clamp(8px,1.5vw,20px);
+  transition:background .18s,color .18s;
+  position:relative;
+}
+details.svc summary::-webkit-details-marker{display:none}
+details.svc summary:hover,details.svc[open] summary{background:var(--ink);color:var(--paper)}
+details.svc summary:hover .num,details.svc[open] .num{color:var(--orange)}
+details.svc summary:hover .svc-sub{color:#f3efe6b3}
+.num{font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--blue);transition:color .18s}
+details.svc h3{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(1.5rem,3.6vw,2.8rem);line-height:1.05;letter-spacing:.01em;
+}
+.svc-sub{font-size:.92rem;color:#111110a6;margin-top:6px;max-width:46rem;font-weight:500;transition:color .18s}
+.svc-plus{
+  font-family:var(--display);font-size:clamp(1.6rem,2.6vw,2.2rem);
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),color .18s;
+}
+details.svc[open] .svc-plus{transform:rotate(45deg);color:var(--orange)}
+.svc-panel{
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1);
+  background:var(--ink);color:var(--paper);
+}
+details.svc[open] .svc-panel{grid-template-rows:1fr}
+.svc-panel-inner{overflow:hidden}
+.svc-panel ul{
+  list-style:none;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:2px;
+  padding:0 clamp(8px,1.5vw,20px) clamp(20px,3vh,30px) clamp(8px,1.5vw,20px);
+}
+.svc-panel li{
+  background:#f3efe60f;border:1px solid #f3efe626;
+  padding:14px 16px;font-size:.9rem;font-weight:500;
+  display:flex;gap:10px;align-items:baseline;
+}
+.svc-panel li::before{content:"✦";color:var(--orange);flex-shrink:0;font-size:.8em}
+.svc-hint{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-top:14px}
+
+/* stats band */
+.stats{
+  background:var(--paper);
+  border-top:3px solid var(--ink);
+  padding:0 var(--pad);
+}
+.stats .shell{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat{
+  padding:clamp(30px,5vh,48px) clamp(12px,2vw,28px);
+  border-right:2px solid var(--ink);
+  text-align:center;
+}
+.stat:first-child{border-left:2px solid var(--ink)}
+.stat .n{
+  font-family:var(--display);font-size:clamp(2.4rem,5.5vw,4.4rem);line-height:1;
+  display:block;color:var(--blue);
+}
+.stat .n em{font-style:normal;color:var(--orange)}
+.stat .l{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-top:10px;opacity:.7}
+
+/* why — blue */
+.why{background:var(--blue);color:var(--paper)}
+.why ::selection{background:var(--ink)}
+.why h2{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(2.2rem,6vw,4.6rem);line-height:.98;
+  margin-bottom:clamp(40px,7vh,70px);max-width:18ch;
+}
+.why h2 .pop{color:var(--ink);background:var(--paper);padding:0 .15em;display:inline-block;transform:rotate(-1.5deg)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--paper)}
+.why-card{
+  padding:clamp(26px,4vw,42px);
+  border-right:2px solid var(--paper);
+  transition:background .18s,color .18s;
+}
+.why-card:last-child{border-right:none}
+.why-card:hover{background:var(--paper);color:var(--ink)}
+.why-card .big{font-family:var(--display);font-size:clamp(2.4rem,5vw,4rem);line-height:1;display:block;margin-bottom:16px}
+.why-card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.03em}
+.why-card p{font-size:.93rem;opacity:.85;font-weight:500}
+
+/* packages */
+.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.5vw,30px)}
+.pack{
+  border:3px solid var(--ink);background:var(--paper);
+  padding:clamp(26px,3.5vw,40px);
+  display:flex;flex-direction:column;gap:18px;
+  transition:transform .2s,box-shadow .2s;
+  position:relative;
+}
+.pack:hover{transform:translate(-5px,-5px);box-shadow:8px 8px 0 var(--ink)}
+.pack.featured{background:var(--ink);color:var(--paper)}
+.pack.featured .pk-tag{background:var(--orange);color:var(--ink)}
+.pack .badge{
+  position:absolute;top:-14px;right:18px;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--orange);color:var(--ink);font-weight:700;
+  padding:5px 12px;transform:rotate(2deg);
+}
+.pk-tag{
+  align-self:flex-start;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  background:var(--blue);color:var(--paper);padding:5px 12px;
+}
+.pack h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1}
+.pack .for{font-size:.88rem;font-weight:600;opacity:.7;margin-top:-8px}
+.pack ul{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1}
+.pack li{font-size:.92rem;font-weight:500;display:flex;gap:10px;align-items:baseline}
+.pack li::before{content:"→";color:var(--orange);font-weight:700;flex-shrink:0}
+.pack a{
+  text-decoration:none;font-weight:700;font-size:.92rem;
+  display:inline-flex;align-items:center;gap:8px;
+  border-bottom:2px solid currentColor;align-self:flex-start;padding-bottom:2px;
+  transition:gap .2s;
+}
+.pack a:hover{gap:14px}
+.pack-note{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-top:26px;text-align:center}
+
+/* process — ink */
+.how{background:var(--ink);color:var(--paper)}
+.how ::selection{background:var(--blue)}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,52px)}
+.step .stamp{
+  font-family:var(--display);font-size:clamp(3.4rem,7vw,5.6rem);line-height:1;
+  color:transparent;-webkit-text-stroke:2px var(--orange);
+  display:block;margin-bottom:18px;
+}
+.step h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:.02em;margin-bottom:12px}
+.step p{font-size:.94rem;color:#f3efe6b3;font-weight:500}
+
+/* FAQ */
+.faq-list{border-top:3px solid var(--ink);max-width:880px}
+details.faq{border-bottom:2px solid var(--ink)}
+details.faq summary{
+  list-style:none;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:22px 6px;
+  font-weight:700;font-size:clamp(1rem,1.6vw,1.15rem);
+  transition:padding-left .2s,color .2s;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary:hover{padding-left:14px;color:var(--blue)}
+details.faq .svc-plus{font-size:1.4rem}
+details.faq[open] .svc-plus{transform:rotate(45deg);color:var(--orange)}
+.faq-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+details.faq[open] .faq-panel{grid-template-rows:1fr}
+.faq-panel-inner{overflow:hidden}
+.faq-panel p{padding:0 6px 24px;color:#111110b3;font-weight:500;max-width:60ch}
+
+/* ---------- CTA ---------- */
+.cta{
+  background:var(--orange);color:var(--ink);
+  padding:clamp(80px,16vh,170px) var(--pad) clamp(60px,10vh,100px);
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta ::selection{background:var(--ink);color:var(--orange)}
+.cta .mono{font-weight:700}
+.cta h2{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(3rem,11vw,9rem);line-height:.92;letter-spacing:.005em;
+  margin:20px 0 26px;
+}
+.cta h2 .out{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+.cta p{max-width:32rem;margin:0 auto 42px;font-weight:600;font-size:1.05rem}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--wa);color:#fff;text-decoration:none;
+  font-weight:700;font-size:clamp(1.05rem,1.8vw,1.3rem);
+  padding:20px 44px;border-radius:999px;
+  border:3px solid var(--ink);
+  box-shadow:6px 6px 0 var(--ink);
+  transition:transform .15s,box-shadow .15s,background .15s;
+}
+.btn-wa:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink);background:var(--wa-deep)}
+.btn-wa:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--ink)}
+.cta .sub{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-top:24px;opacity:.75}
+.cta .bigstar{
+  position:absolute;font-size:clamp(6rem,14vw,12rem);opacity:.14;pointer-events:none;user-select:none;
+}
+.cta .bigstar.a{top:-30px;left:4%}
+.cta .bigstar.b{bottom:-40px;right:5%;animation-direction:reverse}
+
+/* footer */
+footer{
+  background:var(--ink);color:#f3efe699;
+  padding:26px var(--pad);
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:.82rem;
+}
+footer .logo{color:var(--paper);font-size:1.2rem}
+
+/* floating WA */
+.wa-float{
+  position:fixed;right:18px;bottom:18px;z-index:70;
+  width:58px;height:58px;border-radius:50%;
+  background:var(--wa);color:#fff;
+  display:grid;place-items:center;text-decoration:none;
+  border:3px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  transition:transform .15s,opacity .35s,visibility .35s;
+  opacity:0;visibility:hidden;transform:translateY(12px);
+}
+.wa-float.on{opacity:1;visibility:visible;transform:none}
+.wa-float:hover{transform:rotate(-8deg) scale(1.06)}
+
+/* reveals */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-36px);transition:opacity .6s ease,transform .6s ease}
+.reveal-l.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:920px){
+  .why-grid{grid-template-columns:1fr}
+  .why-card{border-right:none;border-bottom:2px solid var(--paper)}
+  .why-card:last-child{border-bottom:none}
+  .how-grid,.pack-grid{grid-template-columns:1fr}
+  details.svc summary{grid-template-columns:54px 1fr auto}
+  .stats .shell{grid-template-columns:repeat(2,1fr)}
+  .stat{border:1px solid var(--ink)!important}
+  .nav-right a:not(.pill){display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal,.reveal-l,.load-up,.load-fade{opacity:1;transform:none}
+  .rotator span{opacity:0}
+  .rotator span:first-child{opacity:1;transform:none}
+  .wa-float{opacity:1;visibility:visible}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ====== NAV ====== -->
+<nav class="nav">
+  <a class="logo" href="#top">HUSTLR<i>.</i></a>
+  <div class="nav-right">
+    <a href="#services">Apps &amp; services</a>
+    <a href="#packages">Packages</a>
+    <a href="#how">Process</a>
+    <a href="#faq">FAQ</a>
+    <a class="pill" href="#contact">Let's talk ↓</a>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <span class="chip load-fade"><b>●</b> Student-run digital studio</span>
+    <h1>
+      <span class="row"><span class="load-up">We make<span class="star-accent spin"> ✦</span></span></span>
+      <span class="row"><span class="load-up" style="transition-delay:.12s"><span class="rotator" id="rotator">
+        <span class="on">apps</span>
+        <span>websites</span>
+        <span>reels</span>
+        <span>brands</span>
+        <span>chatbots</span>
+        <span>logos</span>
+        <span>content</span>
+      </span></span></span>
+      <span class="row"><span class="load-up outline" style="transition-delay:.24s">that get noticed.</span></span>
+    </h1>
+    <div class="hero-foot load-fade" style="transition-delay:.4s">
+      <p>Hustlr is a crew of students who grew up on the internet — and we build the apps, sites and content that put local businesses on it. <b>One message</b> and we're on it, usually the same day.</p>
+      <a class="scroll-hint" href="#services">Scroll <span class="arr">↓</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ====== TICKER ====== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Apps</span><span class="alt">Websites</span><span>Social media</span><span class="alt">Google Business</span><span>Branding</span><span class="alt">Reels</span><span>Automation</span><span class="alt">Reviews</span>
+    <span>Apps</span><span class="alt">Websites</span><span>Social media</span><span class="alt">Google Business</span><span>Branding</span><span class="alt">Reels</span><span>Automation</span><span class="alt">Reviews</span>
+  </div>
+</div>
+
+<!-- ====== SERVICES (expandable) ====== -->
+<section id="services">
+  <div class="shell">
+    <div class="sec-label reveal"><span class="mono">01 — What we do</span></div>
+    <div class="svc-list">
+      <details class="svc reveal-l" open>
+        <summary>
+          <span class="num">/01</span>
+          <div><h3>App development</h3><p class="svc-sub">The main event — real, working apps built for your business.</p></div>
+          <span class="svc-plus">+</span>
+        </summary>
+        <div class="svc-panel"><div class="svc-panel-inner"><ul>
+          <li>Custom mobile apps</li>
+          <li>Web apps &amp; dashboards</li>
+          <li>Customer-facing apps (ordering, booking, loyalty)</li>
+          <li>Internal tools for running your business</li>
+        </ul></div></div>
+      </details>
+      <details class="svc reveal-l">
+        <summary>
+          <span class="num">/02</span>
+          <div><h3>Digital presence</h3><p class="svc-sub">Get found on Google and every platform your customers use.</p></div>
+          <span class="svc-plus">+</span>
+        </summary>
+        <div class="svc-panel"><div class="svc-panel-inner"><ul>
+          <li>Google Business Profile setup &amp; optimization</li>
+          <li>Social media account creation &amp; management</li>
+          <li>Online reputation management</li>
+          <li>Customer review management</li>
+        </ul></div></div>
+      </details>
+      <details class="svc reveal-l d1">
+        <summary>
+          <span class="num">/03</span>
+          <div><h3>Content creation</h3><p class="svc-sub">Scroll-stopping content, made for the feed.</p></div>
+          <span class="svc-plus">+</span>
+        </summary>
+        <div class="svc-panel"><div class="svc-panel-inner"><ul>
+          <li>Social media posts</li>
+          <li>Posters &amp; banners</li>
+          <li>Short-form videos &amp; reels</li>
+        </ul></div></div>
+      </details>
+      <details class="svc reveal-l d2">
+        <summary>
+          <span class="num">/04</span>
+          <div><h3>Websites</h3><p class="svc-sub">Fast, clean sites built to turn visitors into customers.</p></div>
+          <span class="svc-plus">+</span>
+        </summary>
+        <div class="svc-panel"><div class="svc-panel-inner"><ul>
+          <li>Business websites</li>
+          <li>Landing pages</li>
+          <li>Portfolio websites</li>
+          <li>Website maintenance</li>
+        </ul></div></div>
+      </details>
+      <details class="svc reveal-l d3">
+        <summary>
+          <span class="num">/05</span>
+          <div><h3>Automation</h3><p class="svc-sub">Your business answers, books and follows up — automatically.</p></div>
+          <span class="svc-plus">+</span>
+        </summary>
+        <div class="svc-panel"><div class="svc-panel-inner"><ul>
+          <li>WhatsApp automation</li>
+          <li>Customer inquiry systems</li>
+          <li>Appointment booking systems</li>
+          <li>AI-powered business tools</li>
+        </ul></div></div>
+      </details>
+      <details class="svc reveal-l d4">
+        <summary>
+          <span class="num">/06</span>
+          <div><h3>Branding</h3><p class="svc-sub">Look as good as the work you do.</p></div>
+          <span class="svc-plus">+</span>
+        </summary>
+        <div class="svc-panel"><div class="svc-panel-inner"><ul>
+          <li>Logo design</li>
+          <li>Brand identity</li>
+          <li>Marketing materials</li>
+          <li>Business profiles</li>
+        </ul></div></div>
+      </details>
+    </div>
+    <p class="svc-hint reveal">Tap a service to see everything included ↑</p>
+  </div>
+</section>
+
+<!-- ====== STATS ====== -->
+<div class="stats">
+  <div class="shell">
+    <div class="stat reveal"><span class="n"><span class="count" data-to="6">0</span></span><span class="l">Services, one studio</span></div>
+    <div class="stat reveal d1"><span class="n"><span class="count" data-to="24">0</span><em>h</em></span><span class="l">Plan &amp; price turnaround</span></div>
+    <div class="stat reveal d2"><span class="n"><span class="count" data-to="100">0</span><em>%</em></span><span class="l">Student-run &amp; hungry</span></div>
+    <div class="stat reveal d3"><span class="n">7<em>/7</em></span><span class="l">Days a week online</span></div>
+  </div>
+</div>
+
+<!-- ====== WHY ====== -->
+<section class="why" id="why">
+  <div class="shell">
+    <div class="sec-label reveal"><span class="mono">02 — Why Hustlr</span></div>
+    <h2 class="reveal">Young team. <span class="pop">Serious</span> output.</h2>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <span class="big">24/7</span>
+        <h3>Native to the internet</h3>
+        <p>We don't study trends, we live inside them. Your content speaks the platform's language by default — because it's our language too.</p>
+      </div>
+      <div class="why-card">
+        <span class="big">Same day</span>
+        <h3>Zero agency overhead</h3>
+        <p>No account managers, no week-long email chains. You talk directly to the people doing the work, and the work starts fast.</p>
+      </div>
+      <div class="why-card">
+        <span class="big">Fair AF</span>
+        <h3>Student pricing</h3>
+        <p>We're hungry to build our portfolio — you get studio-level work at rates a small business can actually afford.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PACKAGES ====== -->
+<section id="packages">
+  <div class="shell">
+    <div class="sec-label reveal"><span class="mono">03 — Packages</span></div>
+    <div class="pack-grid">
+      <div class="pack reveal">
+        <span class="pk-tag">Starter</span>
+        <h3>Get found</h3>
+        <p class="for">For businesses that are invisible online</p>
+        <ul>
+          <li>Google Business Profile, fully set up</li>
+          <li>Social accounts created &amp; branded</li>
+          <li>Logo refresh + basic brand kit</li>
+          <li>One-page website / landing page</li>
+        </ul>
+        <a href="#contact">Ask about Get Found →</a>
+      </div>
+      <div class="pack featured reveal d1">
+        <span class="badge">Most popular</span>
+        <span class="pk-tag">Growth</span>
+        <h3>Get seen</h3>
+        <p class="for">For businesses ready to grow their audience</p>
+        <ul>
+          <li>Everything in Get Found</li>
+          <li>Monthly content: posts, posters &amp; reels</li>
+          <li>Review &amp; reputation management</li>
+          <li>Full business website</li>
+        </ul>
+        <a href="#contact">Ask about Get Seen →</a>
+      </div>
+      <div class="pack reveal d2">
+        <span class="pk-tag">Full stack</span>
+        <h3>Get automated</h3>
+        <p class="for">For businesses that want it all handled</p>
+        <ul>
+          <li>Everything in Get Seen</li>
+          <li>Custom app for your business</li>
+          <li>WhatsApp automation &amp; inquiry bot</li>
+          <li>Appointment booking system</li>
+          <li>AI-powered business tools</li>
+          <li>Ongoing maintenance &amp; support</li>
+        </ul>
+        <a href="#contact">Ask about Get Automated →</a>
+      </div>
+    </div>
+    <p class="pack-note reveal">Every business is different — message us and we'll quote a plan that fits yours.</p>
+  </div>
+</section>
+
+<!-- ====== PROCESS ====== -->
+<section class="how" id="how">
+  <div class="shell">
+    <div class="sec-label reveal"><span class="mono">04 — How it works</span></div>
+    <div class="how-grid">
+      <div class="step reveal">
+        <span class="stamp">01</span>
+        <h3>Tell us what's broken</h3>
+        <p>No website? Dead Instagram? Zero reviews? Message us what your business does and what's bugging you — we'll figure out the rest.</p>
+      </div>
+      <div class="step reveal d1">
+        <span class="stamp">02</span>
+        <h3>Get a simple plan</h3>
+        <p>Within 24 hours you get a clear plan and a fixed price. Plain words, defined scope, no surprise costs.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="stamp">03</span>
+        <h3>We build, you grow</h3>
+        <p>We ship the work, keep you in the loop as we go, and stick around after launch to keep everything running.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="faq">
+  <div class="shell">
+    <div class="sec-label reveal"><span class="mono">05 — FAQ</span></div>
+    <div class="faq-list">
+      <details class="faq reveal-l">
+        <summary>You actually build apps? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>Yes — it's our main thing. Ordering apps, booking apps, loyalty apps, internal dashboards — if your business needs it, we build it, ship it, and maintain it. Tell us the idea and we'll tell you exactly what it takes.</p></div></div>
+      </details>
+      <details class="faq reveal-l">
+        <summary>How much does it cost? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>It depends on what you need — a landing page is a very different job from a full brand + automation setup. Message us what you're after and you'll get a fixed quote within 24 hours. Student-run means our rates are genuinely small-business friendly.</p></div></div>
+      </details>
+      <details class="faq reveal-l">
+        <summary>Do I need to know anything about tech? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>Nope. You tell us about your business in plain words, we handle everything technical. We'll explain what we're doing without the jargon, and you approve things on WhatsApp as we go.</p></div></div>
+      </details>
+      <details class="faq reveal-l">
+        <summary>How long does a project take? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>Small jobs like a Google Business setup or a landing page can be done within days. Full websites and brand identities usually take 1–3 weeks. You get a timeline upfront with your quote, and updates while we work.</p></div></div>
+      </details>
+      <details class="faq reveal-l">
+        <summary>Who owns the work when it's done? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>You do. Your accounts, your website, your logo files — everything is handed over in your name with full access. We're happy to keep maintaining it for you, but you're never locked in.</p></div></div>
+      </details>
+      <details class="faq reveal-l">
+        <summary>What happens after launch? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>Your choice: take the keys and run it yourself, or have us stay on for content, maintenance and management month to month. No long contracts either way.</p></div></div>
+      </details>
+      <details class="faq reveal-l">
+        <summary>You're students — can I trust you with my business? <span class="svc-plus">+</span></summary>
+        <div class="faq-panel"><div class="faq-panel-inner"><p>Fair question. Being students is exactly why we're good at this: we grew up on these platforms and we're building our reputation, which means we can't afford to do sloppy work. Fixed scope, written plans, and you own everything — so the risk stays low and the work stays sharp.</p></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ====== REVERSE TICKER ====== -->
+<div class="ticker orange rev" aria-hidden="true">
+  <div class="ticker-track">
+    <span>No meetings</span><span class="alt">No jargon</span><span>Same-day replies</span><span class="alt">Fixed prices</span><span>You own everything</span><span class="alt">Built by students</span>
+    <span>No meetings</span><span class="alt">No jargon</span><span>Same-day replies</span><span class="alt">Fixed prices</span><span>You own everything</span><span class="alt">Built by students</span>
+  </div>
+</div>
+
+<!-- ====== BOTTOM CTA ====== -->
+<!-- ⚠️ Replace 0000000000 with your WhatsApp number (country code, no + or spaces) in both wa.me links -->
+<div class="cta" id="contact">
+  <span class="bigstar spin a" aria-hidden="true">✦</span>
+  <span class="bigstar spin b" aria-hidden="true">✦</span>
+  <div class="shell reveal">
+    <span class="mono">06 — Say hi</span>
+    <h2>Slide into<br><span class="out">our DMs.</span></h2>
+    <p>One message is all it takes. Tell us about your business and we'll reply with ideas and a plan — free, no strings.</p>
+    <a class="btn-wa" href="https://wa.me/0000000000?text=Hey%20Hustlr!%20I%20want%20to%20grow%20my%20business%20online." target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5L9 6.9c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.5-.4zM12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 1 1 12 22zm0-21.8A11.8 11.8 0 0 0 1.9 18L.5 23.5 6 22.1A11.8 11.8 0 1 0 12 .2z"/></svg>
+      WhatsApp us
+    </a>
+    <p class="sub">Replies same day · No meetings · No jargon</p>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <a class="logo" href="#top">HUSTLR<i>.</i></a>
+  <span class="mono">Built by students. Powered by hustle. © 2026</span>
+</footer>
+
+<!-- floating WhatsApp -->
+<a class="wa-float" id="waFloat" href="https://wa.me/0000000000?text=Hey%20Hustlr!%20I%20want%20to%20grow%20my%20business%20online." target="_blank" rel="noopener" aria-label="Chat with Hustlr on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5L9 6.9c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.5-.4zM12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 1 1 12 22zm0-21.8A11.8 11.8 0 0 0 1.9 18L.5 23.5 6 22.1A11.8 11.8 0 1 0 12 .2z"/></svg>
+</a>
+
+<script>
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// hero load sequence
+window.addEventListener('load',()=>document.body.classList.add('loaded'));
+setTimeout(()=>document.body.classList.add('loaded'),600); // fallback
+
+// rotating word
+const words=document.querySelectorAll('#rotator span');
+if(!reduce && words.length>1){
+  let i=0;
+  setInterval(()=>{
+    words[i].classList.remove('on');
+    i=(i+1)%words.length;
+    words[i].classList.add('on');
+  },1900);
+}
+
+// scroll reveals
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.reveal,.reveal-l').forEach(el=>io.observe(el));
+
+// count-up stats
+const counters=document.querySelectorAll('.count');
+const cio=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    cio.unobserve(e.target);
+    const el=e.target,to=+el.dataset.to;
+    if(reduce){el.textContent=to;return;}
+    const t0=performance.now(),dur=1200;
+    (function tick(t){
+      const p=Math.min((t-t0)/dur,1);
+      el.textContent=Math.round(to*(1-Math.pow(1-p,3)));
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+  });
+},{threshold:.5});
+counters.forEach(c=>cio.observe(c));
+
+// scroll progress bar
+const bar=document.getElementById('progress');
+function onScroll(){
+  const h=document.documentElement;
+  bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  updateFloat();
+}
+// floating WhatsApp: show after hero, hide near bottom CTA
+const waFloat=document.getElementById('waFloat');
+const hero=document.querySelector('.hero');
+const cta=document.getElementById('contact');
+function updateFloat(){
+  const pastHero=window.scrollY>hero.offsetHeight*0.7;
+  const nearCta=cta.getBoundingClientRect().top<window.innerHeight*0.6;
+  waFloat.classList.toggle('on',pastHero&&!nearCta);
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+
+// only one service / faq open at a time
+document.querySelectorAll('details').forEach(d=>{
+  d.addEventListener('toggle',()=>{
+    if(d.open)document.querySelectorAll('details[open]').forEach(o=>{if(o!==d&&o.className===d.className.replace(' in',''))o.open=false;});
+  });
+});
+</script>
+</body>
+</html>

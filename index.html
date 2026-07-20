@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUSTLR LABS — Your business has a ceiling.</title>
+<meta name="description" content="HUSTLR LABS finds what's actually stopping your business and builds whatever removes it. We have no product to protect — which means our diagnosis is the one you can trust.">
+<meta property="og:title" content="HUSTLR LABS — Your business has a ceiling.">
+<meta property="og:description" content="We find the constraint. We remove it. Whatever that takes.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect x='8' y='10' width='80' height='18' fill='%23131311'/%3E%3Crect x='8' y='40' width='22' height='48' fill='%23131311'/%3E%3Crect x='66' y='40' width='22' height='48' fill='%23131311'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HUSTLR LABS — COMPANY SITE
+   Same system as the position: paper, ink, steel, one chalk line.
+   ============================================================ */
+:root{
+  --paper:#FAFAF7;
+  --paper-2:#F1F1EC;
+  --ink:#131311;
+  --ink-2:#3B3B37;
+  --steel:#70706A;
+  --line:rgba(19,19,17,.16);
+  --line-strong:rgba(19,19,17,.5);
+  --mark:#E8391B;
+  --pad:clamp(20px,4vw,56px);
+  --max:1360px;
+  --fd:'Archivo',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --fs:'Newsreader',Georgia,'Times New Roman',serif;
+  --fm:'Fragment Mono','SFMono-Regular',Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--fs);font-size:17.5px;line-height:1.66;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+::selection{background:var(--ink);color:var(--paper)}
+.ink ::selection{background:var(--paper);color:var(--ink)}
+a{color:inherit}
+img,svg{display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.ink :focus-visible{outline-color:var(--paper)}
+
+.mono{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;line-height:1.6}
+.xl{font-family:var(--fd);font-stretch:78%;font-weight:750;text-transform:uppercase;line-height:.92;letter-spacing:-.005em}
+.giant{font-size:clamp(36px,10.6vw,158px)}
+.stmt{font-size:clamp(34px,5.6vw,82px)}
+.lede{font-size:clamp(21px,2.4vw,30px);line-height:1.42}
+.serif-lg{font-size:clamp(19px,2vw,24px);line-height:1.55}
+.muted{color:var(--steel)}
+em{font-style:italic}
+strong{font-weight:600}
+
+.skip{position:fixed;left:-999px;top:12px;z-index:200;background:var(--ink);color:var(--paper);padding:10px 16px;font-family:var(--fm);font-size:12px;text-decoration:none}
+.skip:focus{left:12px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;height:64px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--paper);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand svg{height:22px;width:auto}
+.wordmark{font-family:var(--fd);font-stretch:82%;font-weight:730;font-size:15.5px;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.nav__links{display:none;align-items:center;gap:26px;list-style:none}
+.nav__links a{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;padding:6px 0;color:var(--ink-2)}
+.nav__links a:hover{color:var(--ink)}
+@media(min-width:960px){.nav__links{display:flex}}
+.nav__right{display:flex;align-items:center;gap:22px}
+.nav__toc{display:flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 2px}
+.nav__toc .tick{display:inline-block;width:18px;height:1.5px;background:var(--ink)}
+@media(min-width:960px){.nav__toc{display:none}}
+
+/* ---------- overlay index (mobile) ---------- */
+.toc{position:fixed;inset:0;z-index:150;background:var(--ink);color:#F2F2ED;display:none;flex-direction:column;padding:0 var(--pad);overflow-y:auto}
+.toc.open{display:flex}
+.toc__bar{display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(244,244,239,.18);flex-shrink:0}
+.toc__close{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 2px}
+.toc__list{list-style:none;margin:auto 0;padding:48px 0}
+.toc__list a{display:flex;align-items:baseline;gap:20px;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(244,244,239,.12)}
+.toc__list .n{font-family:var(--fm);font-size:12px;color:rgba(244,244,239,.5);min-width:34px}
+.toc__list .t{font-family:var(--fd);font-stretch:78%;font-weight:700;text-transform:uppercase;font-size:clamp(24px,6vw,40px);line-height:1.1}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.sec{padding:clamp(84px,10.5vw,152px) 0}
+.sec[id]{scroll-margin-top:76px}
+.measure{max-width:660px}
+.flow>*+*{margin-top:1.25em}
+
+/* ---------- broken rule ---------- */
+.rule{display:flex;align-items:center;gap:18px;margin-bottom:clamp(40px,6vw,80px);position:relative}
+.rule__seg{height:1px;background:var(--line-strong);display:block}
+.rule__seg--l{width:clamp(20px,4vw,48px);flex-shrink:0;transform-origin:right center}
+.rule__seg--r{flex-grow:1;transform-origin:left center}
+.rule__label{white-space:nowrap;color:var(--ink)}
+.js .rule .rule__seg{transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.7,.2,1) .1s}
+.js .rule.in .rule__seg{transform:scaleX(1)}
+
+/* ---------- reveal ---------- */
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d1{transition-delay:.08s}.js .rv.d2{transition-delay:.16s}.js .rv.d3{transition-delay:.24s}
+
+/* ---------- hero: the ceiling ---------- */
+.hero{padding:clamp(118px,16vh,180px) 0 clamp(76px,9vw,128px)}
+.hero .mono-top{margin-bottom:clamp(40px,6vw,72px);color:var(--steel)}
+.ceil{display:flex;align-items:center;margin-bottom:clamp(22px,3vw,40px);position:relative;height:3px}
+.ceil__l{height:2px;background:var(--ink);width:58%;transform-origin:left center}
+.ceil__gap{width:0;transition:width .7s cubic-bezier(.2,.7,.2,1) 1.05s}
+.ceil__r{height:2px;background:var(--ink);flex-grow:1;transform-origin:right center}
+.js .ceil__l,.js .ceil__r{transform:scaleX(0)}
+.js .ceil__l{transition:transform .8s cubic-bezier(.2,.7,.2,1) .15s}
+.js .ceil__r{transition:transform .8s cubic-bezier(.2,.7,.2,1) .3s}
+.js .ld .ceil__l,.js .ld .ceil__r{transform:scaleX(1)}
+.js .ld .ceil__gap{width:clamp(40px,6vw,88px)}
+.ceil .lift{position:absolute;left:58%;top:-6px;width:clamp(40px,6vw,88px);height:3px;background:var(--mark);opacity:0;pointer-events:none}
+.js .ld .ceil .lift{animation:lift 1.3s cubic-bezier(.2,.6,.2,1) 1.1s forwards}
+@keyframes lift{0%{opacity:0;transform:translateY(6px)}25%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+.hero h1{margin:0 0 clamp(34px,4.6vw,58px)}
+.mask{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.mask>span{display:block}
+.js .mask>span{transform:translateY(112%);transition:transform 1s cubic-bezier(.16,.8,.24,1) .35s}
+.js .ld .mask>span{transform:none}
+.js .ld .mask.m2>span{transition-delay:.45s}
+.hero__pos{max-width:720px;font-weight:600;font-size:clamp(20px,2.3vw,28px);line-height:1.46}
+.hero__sub{max-width:600px;margin-top:18px;color:var(--ink-2);font-size:clamp(17.5px,1.8vw,20px)}
+.js .fade{opacity:0;transition:opacity .9s ease .9s}
+.js .ld .fade{opacity:1}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:clamp(36px,4.6vw,56px)}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);font-family:var(--fm);font-size:12px;letter-spacing:.13em;text-transform:uppercase;padding:16px 26px;text-decoration:none;transition:background .25s ease}
+.btn:hover{background:#000}
+.btn--ghost{background:none;color:var(--ink);border:1px solid var(--line-strong)}
+.btn--ghost:hover{background:var(--paper-2)}
+.ink .btn{background:var(--paper);color:var(--ink)}
+.ink .btn:hover{background:#fff}
+.hero__note{margin-top:26px;color:var(--steel)}
+
+/* ---------- truths ---------- */
+.truths{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,48px);margin-top:clamp(44px,5.6vw,72px)}
+.truths li{border-top:1px solid var(--line-strong);padding-top:18px}
+.truths .n{font-family:var(--fd);font-stretch:68%;font-weight:780;font-size:clamp(44px,5vw,72px);line-height:1;display:block;margin-bottom:14px}
+.truths p{font-size:17px;line-height:1.6}
+@media(max-width:760px){.truths{grid-template-columns:1fr}}
+.physics{font-style:italic;font-weight:500;font-size:clamp(23px,3vw,38px);line-height:1.3;margin-top:clamp(44px,5.6vw,72px);max-width:760px}
+
+/* ---------- figure ---------- */
+.fig{margin:clamp(44px,5.6vw,80px) 0 0;max-width:720px}
+.fig svg{width:100%;height:auto}
+.fig .ln-thin{stroke:var(--line-strong);stroke-width:1;fill:none}
+.fig .dash{stroke:var(--steel);stroke-width:1.2;stroke-dasharray:2 7;fill:none}
+.fig .beam{stroke:var(--ink);stroke-width:2.5;fill:none}
+.fig .arr{stroke:var(--ink);stroke-width:1.5;fill:none}
+.fig .arrh{fill:var(--ink)}
+.fig .delta{stroke:var(--mark);stroke-width:1.5}
+.fig .dtxt{font-family:var(--fm);font-size:11px;fill:var(--mark)}
+.fig .ltxt{font-family:var(--fm);font-size:10px;letter-spacing:.14em;fill:var(--steel)}
+figcaption{margin-top:16px;color:var(--steel)}
+.js .fig .beam{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s ease .25s}
+.js .fig.in .beam{stroke-dashoffset:0}
+.js .fig .arrg{opacity:0;transition:opacity .7s ease}
+.js .fig.in .a1{transition-delay:.9s;opacity:1}
+.js .fig.in .a2{transition-delay:1.05s;opacity:1}
+.js .fig.in .a3{transition-delay:1.2s;opacity:1}
+.js .fig .dg{opacity:0;transition:opacity .6s ease 1.5s}
+.js .fig.in .dg{opacity:1}
+
+/* ---------- method ---------- */
+.steps{list-style:none;margin-top:clamp(44px,5.6vw,72px)}
+.steps li{border-top:1px solid var(--line-strong);padding:clamp(30px,3.8vw,52px) 0;display:grid;grid-template-columns:clamp(64px,9vw,140px) 1fr;gap:clamp(20px,4vw,64px)}
+.steps .n{font-family:var(--fd);font-stretch:68%;font-weight:790;font-size:clamp(60px,8.4vw,130px);line-height:.85}
+.steps h3{font-family:var(--fd);font-stretch:78%;font-weight:740;text-transform:uppercase;font-size:clamp(23px,3vw,40px);line-height:1;margin-bottom:15px;letter-spacing:-.005em}
+.steps p{max-width:560px;font-size:clamp(18px,1.9vw,21px);line-height:1.6}
+.inventory{margin-top:clamp(36px,4.6vw,56px);border-top:1px solid var(--line-strong);padding-top:clamp(26px,3.2vw,40px);max-width:680px;font-size:clamp(19px,2vw,24px);line-height:1.5}
+
+/* ---------- constraint ledger ---------- */
+.cxwrap{margin-top:clamp(44px,5.6vw,72px);border-top:1px solid var(--line-strong);list-style:none}
+.cx{border-bottom:1px solid var(--line-strong)}
+.cx__head{width:100%;display:grid;grid-template-columns:90px 1fr auto;align-items:baseline;gap:clamp(14px,3vw,40px);padding:clamp(20px,2.6vw,32px) 0;text-align:left}
+@media(max-width:560px){.cx__head{grid-template-columns:48px 1fr auto;gap:10px}.cx__name{font-size:clamp(21px,7vw,32px)!important}}
+.cx__idx{color:var(--steel)}
+.cx__name{font-family:var(--fd);font-stretch:78%;font-weight:740;text-transform:uppercase;font-size:clamp(26px,4.2vw,54px);line-height:1;letter-spacing:-.005em;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.cx__head:hover .cx__name{transform:translateX(10px)}
+.cx__tog{color:var(--steel);font-size:15px}
+.cx__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.cx__panel>div{overflow:hidden}
+.cx__body{padding:0 0 clamp(24px,3vw,36px);max-width:660px}
+.cx__body p{font-size:clamp(18px,1.9vw,22px);line-height:1.55}
+.cx__builds{display:block;margin-top:14px;color:var(--steel);text-transform:uppercase}
+.cx.open .cx__panel{grid-template-rows:1fr}
+.cx.open .cx__tog::before{content:'−'}
+.cx .cx__tog::before{content:'+'}
+.cx--mark{border-bottom:2px solid var(--mark)}
+.cx--mark .cx__idx,.cx--mark .cx__tog{color:var(--mark)}
+.cx--mark .cx__builds{color:var(--mark)}
+.believable{margin-top:clamp(32px,4vw,48px);font-weight:600;max-width:640px}
+
+/* ---------- ink sections ---------- */
+.ink{background:var(--ink);color:#F2F2ED}
+.ink .rule__seg{background:rgba(244,244,239,.4)}
+.ink .rule__label{color:#F2F2ED}
+.ink .muted{color:#A3A39B}
+
+/* ---------- proof (reserved) ---------- */
+.proof{border:1px solid rgba(244,244,239,.28);padding:clamp(30px,4vw,56px);max-width:800px;position:relative}
+.proof .corner{position:absolute;width:10px;height:10px;border-color:rgba(244,244,239,.6);border-style:solid}
+.proof .c1{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.proof .c2{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.proof .c3{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.proof .c4{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.proof .mono{color:#A3A39B;margin-bottom:16px;display:block}
+.proof p{font-size:clamp(18px,2vw,23px);line-height:1.55;max-width:620px}
+.proof .res{margin-top:22px;color:var(--mark);letter-spacing:.2em}
+
+/* ---------- fit ---------- */
+.dip{display:grid;grid-template-columns:1fr;margin-top:clamp(40px,5vw,64px)}
+@media(min-width:960px){.dip{grid-template-columns:1fr 1fr}}
+.dip__col{padding:clamp(26px,3.2vw,44px) 0}
+@media(min-width:960px){
+  .dip__col:first-child{padding-right:clamp(36px,4vw,64px);border-right:1px solid var(--line-strong)}
+  .dip__col:last-child{padding-left:clamp(36px,4vw,64px)}
+}
+@media(max-width:959px){.dip__col:first-child{border-bottom:1px solid var(--line-strong)}}
+.dip .llabel{display:block;color:var(--steel);margin-bottom:6px}
+.qlist{list-style:none;margin-top:12px}
+.qlist li{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:17px;line-height:1.55}
+.qlist .b{font-family:var(--fm);font-size:13px;line-height:1.9;color:var(--steel)}
+.qlist.x .b{color:var(--mark)}
+.specialist{margin-top:clamp(32px,4vw,48px);max-width:640px;font-size:clamp(18px,1.9vw,22px)}
+
+/* ---------- builders ---------- */
+.build-pos{max-width:760px;font-size:clamp(19px,2.2vw,26px);line-height:1.5;font-weight:500;margin-bottom:clamp(36px,4.6vw,56px)}
+.joins{margin:clamp(28px,3.4vw,44px) 0 0;font-size:17.5px;max-width:640px}
+.joins .stay{font-weight:600}
+
+/* ---------- words strip ---------- */
+.words{display:grid;grid-template-columns:1fr;gap:0;margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--line-strong)}
+@media(min-width:860px){.words{grid-template-columns:repeat(3,1fr)}}
+.words div{border-bottom:1px solid var(--line-strong);padding:clamp(22px,2.8vw,36px) 0}
+@media(min-width:860px){
+  .words div{border-bottom:0;padding:clamp(22px,2.8vw,36px) clamp(20px,2.6vw,40px) clamp(22px,2.8vw,36px) 0}
+  .words div+div{border-left:1px solid var(--line-strong);padding-left:clamp(20px,2.6vw,40px)}
+}
+.words h3{font-family:var(--fd);font-stretch:78%;font-weight:740;text-transform:uppercase;font-size:clamp(26px,3vw,40px);line-height:1;margin-bottom:12px;letter-spacing:-.005em}
+.words p{font-size:16.5px;color:var(--ink-2);max-width:340px}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);color:#F2F2ED;padding:clamp(84px,10.5vw,152px) 0 40px}
+.foot .rule__seg{background:rgba(244,244,239,.4)}
+.foot .rule__label{color:#F2F2ED}
+.foot h2.giant{margin-bottom:clamp(48px,7vw,96px)}
+.contacts{display:grid;grid-template-columns:1fr;gap:40px;border-top:1px solid rgba(244,244,239,.18);padding-top:clamp(32px,4vw,52px)}
+@media(min-width:760px){.contacts{grid-template-columns:1fr 1fr}}
+.contacts .llabel{display:block;color:#A3A39B;margin-bottom:14px}
+.contacts .line{font-size:clamp(20px,2.2vw,26px);margin-bottom:16px}
+.contacts a.mail{font-family:var(--fm);font-size:13px;letter-spacing:.08em;color:#F2F2ED;text-decoration:none;border-bottom:1px solid rgba(244,244,239,.4);padding-bottom:3px}
+.contacts a.mail:hover{border-color:var(--mark);color:#fff}
+.posline{margin-top:clamp(56px,7vw,88px);border-top:1px solid rgba(244,244,239,.18);padding-top:26px;max-width:720px}
+.posline p{font-size:17px;color:#C9C9C1}
+.posline a{color:#F2F2ED}
+.colophon{margin-top:clamp(48px,6vw,72px);border-top:1px solid rgba(244,244,239,.18);padding-top:28px;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-end}
+.colophon .brand svg{height:20px}
+.colophon .meta{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8D8D85;line-height:2;text-align:right}
+@media(max-width:600px){.colophon .meta{text-align:left}}
+
+@media (prefers-reduced-motion:reduce){
+  .js .rv,.js .mask>span,.js .rule .rule__seg,.js .fig .beam,.js .fig .arrg,.js .fig .dg,.js .fade,
+  .js .ceil__l,.js .ceil__r{opacity:1!important;transform:none!important;transition:none!important;stroke-dashoffset:0!important}
+  .js .ceil__gap{width:clamp(40px,6vw,88px)!important;transition:none!important}
+  .js .ld .ceil .lift{animation:none!important}
+  .cx__panel{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <a class="brand" href="#top" aria-label="HUSTLR LABS — top of page">
+    <svg viewBox="0 0 96 96" aria-hidden="true"><rect x="8" y="12" width="80" height="16" fill="currentColor"/><rect x="8" y="38" width="20" height="50" fill="currentColor"/><rect x="68" y="38" width="20" height="50" fill="currentColor"/></svg>
+    <span class="wordmark">Hustlr&nbsp;Labs</span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="#ceiling">The Ceiling</a></li>
+    <li><a href="#method">The Method</a></li>
+    <li><a href="#constraint">The Constraint</a></li>
+    <li><a href="#fit">Fit</a></li>
+    <li><a href="#builders">Builders</a></li>
+    <li><a href="position.html">The Position</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="nav__toc" id="tocOpen" aria-haspopup="dialog" aria-controls="toc"><span class="tick" aria-hidden="true"></span>Index</button>
+  </div>
+</header>
+
+<!-- ================= INDEX OVERLAY (mobile) ================= -->
+<nav class="toc" id="toc" role="dialog" aria-modal="true" aria-label="Site index">
+  <div class="toc__bar">
+    <span class="mono muted">Hustlr Labs</span>
+    <button class="toc__close" id="tocClose">Close ✕</button>
+  </div>
+  <ul class="toc__list">
+    <li><a href="#ceiling"><span class="n">01</span><span class="t">The Ceiling</span></a></li>
+    <li><a href="#method"><span class="n">02</span><span class="t">The Method</span></a></li>
+    <li><a href="#constraint"><span class="n">03</span><span class="t">The Constraint</span></a></li>
+    <li><a href="#proof"><span class="n">04</span><span class="t">Proof</span></a></li>
+    <li><a href="#fit"><span class="n">05</span><span class="t">Fit</span></a></li>
+    <li><a href="#builders"><span class="n">06</span><span class="t">The Builders</span></a></li>
+    <li><a href="#contact"><span class="n">—</span><span class="t">Contact</span></a></li>
+    <li><a href="position.html"><span class="n">→</span><span class="t">The Position</span></a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="mono mono-top fade">For ambitious businesses that don't know what's stopping them</p>
+
+    <div class="ceil" aria-hidden="true">
+      <span class="ceil__l"></span><span class="ceil__gap"></span><span class="ceil__r"></span>
+      <span class="lift"></span>
+    </div>
+
+    <h1 class="xl giant">
+      <span class="mask m1"><span>Your business</span></span>
+      <span class="mask m2"><span>has a ceiling.</span></span>
+    </h1>
+
+    <p class="hero__pos fade">HUSTLR LABS finds what's actually stopping your business and builds whatever removes it. We have no product to protect — which means our diagnosis is the one you can trust.</p>
+    <p class="hero__sub fade">You can't see the ceiling. It's made of systems that worked — until growth loaded them past their limit. Effort won't move it. Diagnosis will.</p>
+
+    <div class="cta-row fade">
+      <a class="btn" href="mailto:hello@hustlrlabs.com?subject=The%20Diagnosis">Start the diagnosis</a>
+      <a class="btn btn--ghost" href="#builders">For builders</a>
+    </div>
+    <p class="mono hero__note fade">No menu of services. The constraint decides the work.</p>
+  </div>
+</section>
+
+<!-- ================= 01 · THE CEILING ================= -->
+<section class="sec" id="ceiling">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">01 — The Ceiling</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <h2 class="xl stmt rv">Businesses don't run out of ambition. They run out of system.</h2>
+
+    <ol class="truths">
+      <li class="rv"><span class="n" aria-hidden="true">1</span><p>Every business runs on systems nobody designed. They accumulated.</p></li>
+      <li class="rv d1"><span class="n" aria-hidden="true">2</span><p>Those systems worked — that's why the business grew.</p></li>
+      <li class="rv d2"><span class="n" aria-hidden="true">3</span><p>Growth is a load. Load breaks the system that carried it.</p></li>
+    </ol>
+
+    <figure class="fig rv">
+      <svg viewBox="0 0 640 226" role="img" aria-label="Engineering diagram of a beam deflecting under load">
+        <line class="ln-thin" x1="36" y1="190" x2="604" y2="190"/>
+        <path class="ln-thin" d="M80 152 L60 190 L100 190 Z"/>
+        <path class="ln-thin" d="M560 152 L540 190 L580 190 Z"/>
+        <line class="dash" x1="80" y1="152" x2="560" y2="152"/>
+        <path class="beam" pathLength="1" d="M80 152 Q320 182 560 152"/>
+        <g class="arrg a1"><line class="arr" x1="278" y1="94" x2="278" y2="132"/><path class="arrh" d="M278 142 L272 130 L284 130 Z"/></g>
+        <g class="arrg a2"><line class="arr" x1="320" y1="82" x2="320" y2="136"/><path class="arrh" d="M320 146 L314 134 L326 134 Z"/></g>
+        <g class="arrg a3"><line class="arr" x1="362" y1="94" x2="362" y2="132"/><path class="arrh" d="M362 142 L356 130 L368 130 Z"/></g>
+        <text class="ltxt" x="320" y="62" text-anchor="middle">LOAD</text>
+        <g class="dg"><line class="delta" x1="330" y1="152" x2="330" y2="167"/><text class="dtxt" x="340" y="165">δ</text></g>
+      </svg>
+      <figcaption class="mono">Fig. 01 — Growth is a load. Load breaks the system that carried it.</figcaption>
+    </figure>
+
+    <p class="physics rv">The ceiling isn't a failure. It's physics.</p>
+    <div class="measure flow rv d1" style="margin-top:18px">
+      <p>Which means it's not a character flaw — it's a structural problem. Structural problems can be diagnosed and removed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 · THE METHOD ================= -->
+<section class="sec" id="method">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">02 — The Method</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <p class="lede rv" style="max-width:760px">One method. It never changes, regardless of client or constraint.</p>
+
+    <ol class="steps">
+      <li class="rv">
+        <span class="n" aria-hidden="true">1</span>
+        <div><h3>The Diagnosis.</h3><p>We find what's actually stopping the business. Not what's annoying. Not what the owner thinks it is. What's <em>actually stopping it.</em></p></div>
+      </li>
+      <li class="rv">
+        <span class="n" aria-hidden="true">2</span>
+        <div><h3>The Constraint.</h3><p>There's only ever one that matters at a time. We name it out loud, even when it's uncomfortable.</p></div>
+      </li>
+      <li class="rv">
+        <span class="n" aria-hidden="true">3</span>
+        <div><h3>The Build.</h3><p>Then, and only then, we build. Whatever the constraint demands.</p></div>
+      </li>
+    </ol>
+
+    <p class="inventory rv">Anyone who proposes a solution before completing step one is selling their inventory. <strong>Including us, if we ever start doing it.</strong></p>
+  </div>
+</section>
+
+<!-- ================= 03 · THE CONSTRAINT ================= -->
+<section class="sec" id="constraint">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">03 — The Constraint</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <p class="lede rv" style="max-width:820px">There's only ever one constraint that matters at a time. Which one you have decides what we build.</p>
+
+    <ul class="cxwrap rv">
+      <li class="cx">
+        <button class="cx__head" aria-expanded="false" aria-controls="cxp1">
+          <span class="cx__idx mono">C-01</span><span class="cx__name">Perception</span><span class="cx__tog" aria-hidden="true"></span>
+        </button>
+        <div class="cx__panel" id="cxp1"><div><div class="cx__body">
+          <p>When the constraint is <strong>perception</strong> — the business is better than it looks.</p>
+          <span class="mono cx__builds">Builds: positioning · brand systems · websites · sales material</span>
+        </div></div></div>
+      </li>
+      <li class="cx">
+        <button class="cx__head" aria-expanded="false" aria-controls="cxp2">
+          <span class="cx__idx mono">C-02</span><span class="cx__name">Capacity</span><span class="cx__tog" aria-hidden="true"></span>
+        </button>
+        <div class="cx__panel" id="cxp2"><div><div class="cx__body">
+          <p>When the constraint is <strong>capacity</strong> — the business can't hold what it already wins.</p>
+          <span class="mono cx__builds">Builds: process design · automation · operations tooling</span>
+        </div></div></div>
+      </li>
+      <li class="cx">
+        <button class="cx__head" aria-expanded="false" aria-controls="cxp3">
+          <span class="cx__idx mono">C-03</span><span class="cx__name">Attention</span><span class="cx__tog" aria-hidden="true"></span>
+        </button>
+        <div class="cx__panel" id="cxp3"><div><div class="cx__body">
+          <p>When the constraint is <strong>attention</strong> — the right people don't know it exists.</p>
+          <span class="mono cx__builds">Builds: content engines · distribution · search · outreach systems</span>
+        </div></div></div>
+      </li>
+      <li class="cx">
+        <button class="cx__head" aria-expanded="false" aria-controls="cxp4">
+          <span class="cx__idx mono">C-04</span><span class="cx__name">Infrastructure</span><span class="cx__tog" aria-hidden="true"></span>
+        </button>
+        <div class="cx__panel" id="cxp4"><div><div class="cx__body">
+          <p>When the constraint is <strong>infrastructure</strong> — the tool this business needs doesn't exist yet.</p>
+          <span class="mono cx__builds">Builds: custom software · integrations · AI systems</span>
+        </div></div></div>
+      </li>
+      <li class="cx cx--mark open">
+        <button class="cx__head" aria-expanded="true" aria-controls="cxp5">
+          <span class="cx__idx mono">C-05</span><span class="cx__name">None of these</span><span class="cx__tog" aria-hidden="true"></span>
+        </button>
+        <div class="cx__panel" id="cxp5"><div><div class="cx__body">
+          <p>When the constraint is <strong>none of these</strong> — it's a hire, a price, or a decision — and we say so, even when we can't sell it.</p>
+          <span class="mono cx__builds">Builds: nothing — you get the diagnosis and a straight recommendation</span>
+        </div></div></div>
+      </li>
+    </ul>
+
+    <p class="believable rv">That last one matters more than the other four. It's the sentence that makes everything else believable.</p>
+  </div>
+</section>
+
+<!-- ================= 04 · PROOF ================= -->
+<section class="sec ink" id="proof">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">04 — Proof</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <div class="proof rv">
+      <span class="corner c1" aria-hidden="true"></span><span class="corner c2" aria-hidden="true"></span>
+      <span class="corner c3" aria-hidden="true"></span><span class="corner c4" aria-hidden="true"></span>
+      <span class="mono">One real story. Numbers attached.</span>
+      <p>This space is reserved for a client story with numbers attached to it. It stays empty until we have one worth your time. We don't publish logo walls, and we don't make claims we can't measure.</p>
+      <span class="mono res">— Reserved</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 · FIT ================= -->
+<section class="sec" id="fit">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">05 — Fit</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <h2 class="xl stmt rv">We're the wrong choice for most businesses.</h2>
+
+    <div class="dip">
+      <div class="dip__col rv">
+        <span class="mono llabel">What makes a business right for Hustlr</span>
+        <ul class="qlist">
+          <li><span class="b" aria-hidden="true">—</span><span>Growth has slowed and nobody can name why</span></li>
+          <li><span class="b" aria-hidden="true">—</span><span>The founder is still the answer to every problem</span></li>
+          <li><span class="b" aria-hidden="true">—</span><span>They've bought things before and nothing moved</span></li>
+          <li><span class="b" aria-hidden="true">—</span><span>They want the constraint removed, not a specific product delivered</span></li>
+        </ul>
+      </div>
+      <div class="dip__col rv d1">
+        <span class="mono llabel">What disqualifies a business immediately</span>
+        <ul class="qlist x">
+          <li><span class="b" aria-hidden="true">✕</span><span>They want someone to agree with them</span></li>
+          <li><span class="b" aria-hidden="true">✕</span><span>The answer has to be a specific technology before we've diagnosed anything</span></li>
+          <li><span class="b" aria-hidden="true">✕</span><span>They want free work</span></li>
+          <li><span class="b" aria-hidden="true">✕</span><span>They want a unicorn in six months</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="specialist rv">If you already know exactly what you need, a specialist will serve you better and cheaper. We'll say so.</p>
+  </div>
+</section>
+
+<!-- ================= 06 · THE BUILDERS ================= -->
+<section class="sec" id="builders">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">06 — The Builders</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <p class="build-pos rv">HUSTLR LABS is where you work on real businesses before anyone will pay you to. You won't get a salary. You will get a portfolio, real experience, and the chance to be early in something.</p>
+
+    <div class="dip">
+      <div class="dip__col rv">
+        <span class="mono llabel">What Hustlr offers a builder</span>
+        <ul class="qlist">
+          <li><span class="b" aria-hidden="true">—</span><span>Real clients with real problems and real stakes</span></li>
+          <li><span class="b" aria-hidden="true">—</span><span>Work that goes into a portfolio, not a drawer</span></li>
+          <li><span class="b" aria-hidden="true">—</span><span>The experience of seeing a business change because of something you built</span></li>
+          <li><span class="b" aria-hidden="true">—</span><span>Early membership in something that is genuinely being built</span></li>
+        </ul>
+      </div>
+      <div class="dip__col rv d1">
+        <span class="mono llabel">What Hustlr does not offer</span>
+        <ul class="qlist x">
+          <li><span class="b" aria-hidden="true">✕</span><span>A salary right now</span></li>
+          <li><span class="b" aria-hidden="true">✕</span><span>A title that means anything outside this company</span></li>
+          <li><span class="b" aria-hidden="true">✕</span><span>Easy work</span></li>
+          <li><span class="b" aria-hidden="true">✕</span><span>Credit for things that didn't ship</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="joins rv">If someone joins for the LinkedIn bio, they will leave. That's fine.<br><span class="stay">If someone joins because they want to build something real, they will stay.</span></p>
+
+    <div class="cta-row rv">
+      <a class="btn" href="mailto:hello@hustlrlabs.com?subject=Builder">Show us what you've shipped</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 · THREE WORDS ================= -->
+<section class="sec" id="words" style="padding-top:0">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">07 — Three Words We Own</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <div class="words">
+      <div class="rv"><h3>The Ceiling</h3><p>The invisible limit created by systems the business has outgrown.</p></div>
+      <div class="rv d1"><h3>The Constraint</h3><p>The one thing limiting the business right now. There's only ever one that matters at a time.</p></div>
+      <div class="rv d2"><h3>The Diagnosis</h3><p>The first step. The thing we do before we build anything.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <div class="rule rv">
+      <span class="rule__seg rule__seg--l"></span>
+      <span class="rule__label mono">Contact</span>
+      <span class="rule__seg rule__seg--r"></span>
+    </div>
+
+    <h2 class="xl giant rv">Start with<br>the diagnosis.</h2>
+
+    <div class="contacts">
+      <div class="rv">
+        <span class="mono llabel">For clients</span>
+        <p class="line">Bring the problem. Not the product you think fixes it.</p>
+        <a class="mail" href="mailto:hello@hustlrlabs.in?subject=The%20Diagnosis">hello@hustlrlabs.in</a>
+      </div>
+      <div class="rv d1">
+        <span class="mono llabel">For builders</span>
+        <p class="line">Show us what you've shipped.</p>
+        <a class="mail" href="mailto:hello@hustlrlabs.in?subject=Builder">hello@hustlrlabs.in</a>
+      </div>
+    </div>
+
+    <div class="posline rv">
+      <p>This site is built from the Hustlr Labs brand position — the short document. The one everyone reads. The one that doesn't change. <a href="position.html">Read it here.</a> If anything on this site contradicts it, the document wins.</p>
+    </div>
+
+    <div class="colophon">
+      <a class="brand" href="#top" aria-label="HUSTLR LABS — back to top">
+        <svg viewBox="0 0 96 96" aria-hidden="true"><rect x="8" y="12" width="80" height="16" fill="currentColor"/><rect x="8" y="38" width="20" height="50" fill="currentColor"/><rect x="68" y="38" width="20" height="50" fill="currentColor"/></svg>
+        <span class="wordmark">Hustlr&nbsp;Labs</span>
+      </a>
+      <p class="meta">
+        © 2026 Hustlr Labs<br>
+        Set in Archivo, Newsreader &amp; Fragment Mono
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document, html=d.documentElement;
+  html.classList.add('js');
+
+  function go(){ requestAnimationFrame(function(){ d.body.classList.add('ld'); }); }
+  if(d.fonts && d.fonts.ready){ d.fonts.ready.then(go); setTimeout(go,1600); } else { setTimeout(go,300); }
+
+  var toc=d.getElementById('toc'), open=d.getElementById('tocOpen'), close=d.getElementById('tocClose');
+  function tocO(){ toc.classList.add('open'); d.body.style.overflow='hidden'; close.focus(); }
+  function tocC(){ toc.classList.remove('open'); d.body.style.overflow=''; open.focus(); }
+  open.addEventListener('click',tocO);
+  close.addEventListener('click',tocC);
+  toc.addEventListener('click',function(e){ if(e.target.closest('a')) tocC(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape'&&toc.classList.contains('open')) tocC(); });
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  d.querySelectorAll('.rv,.fig').forEach(function(el){ io.observe(el); });
+
+  d.querySelectorAll('.cx__head').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var li=btn.closest('.cx'), on=li.classList.toggle('open');
+      btn.setAttribute('aria-expanded',on?'true':'false');
+    });
+  });
+})();
+</script>
+</body>
+</html>
